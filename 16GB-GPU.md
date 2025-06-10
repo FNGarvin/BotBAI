@@ -1,50 +1,66 @@
 ## Best-of-the-Best Local AI Models for 16GB GPUs
 
+**Legend:**
+* `⭐`: **MUST-HAVE.** Essential for most users, foundational capability or exceptional general utility.
+* `✨`: **HIGHLY RECOMMENDED / SPECIALIZED ALTERNATIVE.** Excellent alternatives or crucial for specific niche use cases.
+
 ---
 
-### Large Language Models (Text Generation)
+### Large Language Models (General Purpose Text Generation)
 
 | Model Name | Recommended Variant/Quantization (for 16GB VRAM) | Ideal Usage Scenario | Comments |
-|:------------------------------|:------------------------------------------------|:----------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Llama 3 8B Instruct** | `8B` (**Q4_K_M** or **Q5_K_M**) | General Chat, Reasoning, Instruction Following | **Highly recommended** for general use. Offers excellent performance and strong reasoning for its size, running very fast with available GPU acceleration. |
-| **Mistral 7B Instruct** | `7B` (**Q4_K_M** or **Q5_K_M**) | General Chat, Summarization, Code Snippets | Very efficient and capable. Provides a great balance of performance and size, making it an excellent all-rounder for various tasks. |
-| **DeepSeek-Coder 7B Instruct** | `7B` (**Q4_K_M** or **Q5_K_M**) | Programming, Code Generation, General Reasoning | A surprisingly strong general-purpose model with exceptional coding abilities. The 7B version runs very quickly and is highly effective for developer-centric tasks. |
-| **Qwen2 7B Instruct** | `7B` (**Q4_K_M** or **Q5_K_M**) | General Chat, Multilingual Tasks, Reasoning | Offers strong performance and robust multilingual support, making it versatile for diverse communication and reasoning needs. |
-| **Phi-3-Mini** | `3.8B` (**Q4_K_M**) | Quick Responses, Coding, Light Reasoning | Extremely small and fast, yet surprisingly capable for its size. Ideal for rapid interactions and efficient coding assistance; runs almost instantly. |
-| **Code Llama 13B Instruct** | `13B` (**Q4_K_M**) | Advanced Code Generation, Debugging | A strong dedicated coding model for more complex programming tasks. The 13B variant will fit well within 16GB VRAM, providing good performance for coding workflows. |
-| **LLaVA 1.6 7B** | `7B` (**Q4_K_M**) | Image Understanding, Visual Question Answering | **Multimodal.** Uniquely allows interaction with images (e.g., "Describe this image," "What's happening here?"). Runs well, but requires a compatible frontend (like Ollama with LLaVA support). |
-| **DeepSeek-Coder 33B Instruct** | `33B` (**Q3_K_M**) | Advanced Programming, Complex Reasoning | **Tight fit.** To run fully on 16GB VRAM, a lower quantization like `Q3_K_M` is often necessary, which can lead to a slight reduction in output quality. Larger contexts may still result in some layers offloading to CPU RAM, impacting speed. Offers more sophisticated coding capabilities than smaller models. |
-| **Qwen2 32B Instruct** | `32B` (**Q3_K_M**) | Complex Chat, Detailed Reasoning, Multilingual | **Tight fit.** Similar to DeepSeek-Coder 33B, this model typically requires `Q3_K_M` quantization to fit into 16GB VRAM. Expect potential minor quality trade-offs and possible CPU offloading for longer interactions. Provides a significant leap in capability over 7B/13B models. |
+|:--------------------------|:------------------------------------------------|:----------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Llama 3 8B Instruct** ⭐ | `8B` (**Q4_K_M** or **Q5_K_M**) | General Chat, Reasoning, Instruction Following | ⭐ The current leading general-purpose LLM for its size, offering excellent performance and strong reasoning. |
+| **Mistral 7B Instruct** ✨ | `7B` (**Q4_K_M** or **Q5_K_M**) | General Chat, Summarization, Code Snippets | ✨ Very efficient and capable, a great all-rounder if Llama 3 isn't preferred. |
+| **Qwen2 7B Instruct** ✨ | `7B` (**Q4_K_M** or **Q5_K_M**) | General Chat, Multilingual Tasks, Reasoning | ✨ Offers strong multilingual support and robust general performance. |
+| **Phi-3-Mini** ⭐ | `3.8B` (**Q4_K_M**) | Quick Responses, Light Reasoning, Basic Coding | ⭐ Extremely small and fast, yet surprisingly capable for its size. Ideal for rapid interactions. |
+| **Qwen2 32B Instruct** ✨ | `32B` (**Q3_K_M**) | Complex Chat, Detailed Reasoning, Multilingual | ✨ To run fully on 16GB VRAM, `Q3_K_M` is typically required. Expect **more apparent quality compromises** but offers significant capability over 7B/13B models. |
+
+---
+
+### Large Language Models (Coding-Specific Text Generation)
+
+| Model Name | Recommended Variant/Quantization (for 16GB VRAM) | Ideal Usage Scenario | Comments |
+|:-----------------------------------|:------------------------------------------------|:----------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **DeepSeek-Coder 7B Instruct** ⭐ | `7B` (**Q4_K_M** or **Q5_K_M**) | Programming, Code Generation, Technical Reasoning | ⭐ A surprisingly strong general-purpose model with exceptional coding abilities, excellent for developer-centric tasks. |
+| **Code Llama 13B Instruct** ✨ | `13B` (**Q4_K_M**) | Advanced Code Generation, Debugging | ✨ A strong dedicated coding model for more complex programming tasks than 7B options. |
+| **DeepSeek-Coder 33B Instruct** ✨ | `33B` (**Q3_K_M**) | Advanced Programming, Complex Reasoning | ✨ To run fully on 16GB VRAM, `Q3_K_M` is necessary. Expect **more noticeable quality trade-offs** (e.g., less nuance) than with higher quantizations. Longer contexts may still offload to CPU RAM. |
+
+---
+
+### Image Analysis Models (Visual Understanding, Captioning, Tagging)
+
+| Model Name | Recommended Variant/Quantization (for 16GB VRAM) | Ideal Usage Scenario | Comments |
+|:---------------------------------|:------------------------------------------------|:----------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **LLaVA 1.6 7B** ⭐ | `7B` (**Q4_K_M**) | Image Understanding, Visual Question Answering, Multimodal Chat | ⭐ A powerful multimodal LLM for interacting with images through text. Runs well via `llama.cpp` compatible frontends (e.g., Ollama). |
+| **CLIP (e.g., OpenAI ViT-L/14)** ⭐ | `ViT-L/14` (optimized, often `fp16` or `Q8`) | Zero-shot image classification, Image similarity search, Text-to-image relevance scoring, Generating image embeddings | ⭐ A foundational model for understanding the relationship between text and images. Highly versatile and efficient for inference. |
+| **BLIP / BLIP-2 (e.g., BLIP Base)** ✨ | `Base` (optimized, often `fp16` or `Q8`) | Image Captioning, Visual Question Answering, Image-to-Text generation | ✨ Excellent for generating descriptive captions. Good if a dedicated captioning model is preferred over LLaVA's chat interface. |
+| **DeepBooru** ✨ | (Standard release, typically `fp16` or optimized) | Automatic anime-style image tagging, Dataset creation for anime models | ✨ Efficient for its niche, but only a "must-have" if working specifically with anime/manga content. |
 
 ---
 
 ### Generative Image Models
 
 | Model Name | Recommended Variant/Quantization (for 16GB VRAM) | Ideal Usage Scenario | Comments |
-|:------------------|:------------------------------------------------|:---------------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Stable Diffusion XL (SDXL)** | `Base` (Optimized, often **Q4_K_M**) | High-quality image generation, photorealism, artistic styles | The industry standard for high-quality image generation. Runs well on 16GB VRAM, typically requiring around 12-14GB for the base model and refiner. |
-| **FLUX.1 Schnell/Dev** | `Schnell FP8` (for efficiency), `Dev` (for research) | Fast image generation, commercial applications | Optimized for lower VRAM usage and noted for its fast generation. The `Schnell` variant is great for general use, while `Dev` might push the 16GB limit for full features. |
+|:----------------------------------|:------------------------------------------------|:---------------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Stable Diffusion XL (SDXL)** ⭐ | `Base` (Optimized, often **Q4_K_M**) | High-quality image generation, photorealism, artistic styles | ⭐ The industry standard for high-quality image generation locally. |
+| **FLUX.1 Schnell/Dev** ✨ | `Schnell FP8` (for efficiency), `Dev` (for research) | Fast image generation, commercial applications | ✨ Optimized for lower VRAM usage and noted for its fast generation. Consider for speed-focused tasks. |
 
 ---
 
 ### Generative Video Models
 
 | Model Name | Recommended Variant/Quantization (for 16GB VRAM) | Ideal Usage Scenario | Comments |
-|:--------------|:------------------------------------------------|:-----------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **LTX Video** | `13B` (Optimized/Quantized, e.g., **GGUF**) | Fast text-to-video, image-to-video, short clips | Highly optimized for consumer GPUs, capable of very fast generation times (e.g., 5 seconds of 24 FPS video in 4 seconds). |
-| **WAN 2.1** | `14B` (**GGUF**, **Q4_K_M** or **Q3_K_M**) | Text-to-video, image-to-video, various resolutions | Can run efficiently on 16GB VRAM with its lower VRAM variants (e.g., ~8GB for base, optimized versions). Offers diverse resolution options. |
+|:-----------------------------|:------------------------------------------------|:-----------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **LTX Video** ✨ | `13B` (Optimized/Quantized, e.g., **GGUF**) | Fast text-to-video, image-to-video, short clips | ✨ One of the leading optimized models for consumer GPUs, capable of very fast generation. |
+| **WAN 2.1** ✨ | `14B` (**GGUF**, **Q4_K_M** or **Q3_K_M**) | Text-to-video, image-to-video, various resolutions | ✨ Another strong contender in the evolving local video generation space. For `Q3_K_M` variants, expect **more visible artifacts** compared to higher quantizations, as visual modalities are highly sensitive. |
 
 ---
 
 ### Generative Audio Models
 
 | Model Name | Recommended Variant/Quantization (for 16GB VRAM) | Ideal Usage Scenario | Comments |
-|:--------------|:------------------------------------------------|:---------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------|
-| **MAGNET (Meta)** | (Standard local release, often optimized) | High-quality music/audio synthesis from text/prompts | Described as the "Stable Diffusion" for audio. Specifically noted to be runnable on 16GB GPUs, making it a strong local option. |
-| **Whisper.cpp** | `large-v3` (Optimized/Quantized) | Speech-to-Text, Transcription | A highly accurate, C++ port of OpenAI's Whisper model. Runs efficiently on GPU, enabling fast and private audio transcription locally. |
+|:---------------------------------|:------------------------------------------------|:---------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------|
+| **MAGNET (Meta)** ✨ | (Standard local release, often optimized) | High-quality music/audio synthesis from text/prompts | ✨ Described as the "Stable Diffusion" for audio, noted to be runnable on 16GB GPUs. |
+| **Whisper.cpp** ⭐ | `large-v3` (Optimized/Quantized) | Speech-to-Text, Transcription | ⭐ A highly accurate, efficient, and broadly useful model for audio transcription. |
 
----
-
-### General Tips for Your 16GB GPU:
-
-* **Prioritize Q4_K_M quantization:** This generally offers the best balance of speed, quality, and VRAM usage for most models on your card. For 30B+ models, `Q3_K_M` will likely be required.
