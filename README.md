@@ -1,6 +1,6 @@
 # Best-of-the-Best Local AI Model Recommendations by GPU VRAM
 
-This repository represents an attempt to provide curated, opinionated lists of "Best-of-the-Best" local AI models optimized for various GPU Video RAM (VRAM) tiers. Each list details recommended models for a specific VRAM capacity, covering Large Language Models (LLMs), Image Analysis models, Generative Image models, Generative Video models, and Generative Audio models.
+This repository represents an attempt to provide curated, opinionated lists of "Best-of-the-Best" local AI models optimized for various GPU Video RAM (VRAM) tiers. Each list details recommended models for a specific VRAM capacity, covering Large Language Models (LLMs), Image Analysis models, Generative Image models, Generative Video models, and Generative Audio models.  It is focused exclusively on inference and generation and does not currently include considerations for training and fine-tunes.
 
 The goal is to help you understand what's realistically achievable with your GPU and to guide you in selecting models that balance performance, quality, and VRAM efficiency for local inference - at least as of today.  Given the fast-moving nature of the tech, that's the best we can do.  But the general guidelines and selection reasoning (specifically in choosing which sacrifices to make wrt precision modes, quantization nodes, and parameter size) should have some lasting value.
 
