@@ -82,4 +82,4 @@ The decision to process AI locally versus using cloud-based alternatives (e.g., 
 
 Ultimately, local AI is a powerful choice for those prioritizing privacy, fine-grained control, hobbyist exploration, and consistent, no-cost usage *after* the initial hardware investment. However, for pushing the absolute boundaries of AI capability, occasional use, or rapid development/deployment without hardware concerns, cloud alternatives remain superior. Many users find a hybrid approach most effective, using local models for common tasks and cloud APIs for more demanding or experimental needs.
 
-**Note on Content Generation:** This document was generated with the assistance of a large language model. While efforts have been made to ensure accuracy and clarity, please report any discrepancies.
+**Note on Content Generation:** These documents were created with the assistance of a large language model.
